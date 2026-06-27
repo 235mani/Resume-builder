@@ -1,0 +1,78 @@
+<div class="layout">
+
+  <header class="glass-panel glass-panel--strong topbar">
+    @if (isHandset()) {
+      <button type="button" class="glass-btn glass-btn--icon glass-btn--ghost" aria-label="Toggle navigation" (click)="toggleSidebar()">
+        <app-icon name="menu" />
+      </button>
+    }
+
+    <app-icon name="description" size="md" />
+    <span class="topbar-title">Resume Builder</span>
+
+    <span class="spacer"></span>
+
+    <button type="button" class="glass-btn glass-btn--ghost logout-btn" title="Sign out" (click)="logout()">
+      <app-icon name="logout" size="sm" />
+      <span class="logout-label">Sign out</span>
+    </button>
+  </header>
+
+  @if (isHandset() && sidebarOpen()) {
+    <div class="sidebar-backdrop" (click)="sidebarOpen.set(false)"></div>
+  }
+
+  <div class="layout-body">
+
+    <aside
+      class="glass-panel sidebar"
+      [class.sidebar--open]="!isHandset() || sidebarOpen()"
+      [class.sidebar--mobile]="isHandset()">
+
+      <nav class="nav-list">
+        <span class="nav-section">Workspace</span>
+
+        <a class="nav-link" routerLink="/resumes" routerLinkActive="active" (click)="closeSidebarOnMobile()">
+          <app-icon name="description" size="sm" />
+          <span>Resume Versions</span>
+        </a>
+
+        <a class="nav-link" routerLink="/profile" routerLinkActive="active" (click)="closeSidebarOnMobile()">
+          <app-icon name="person" size="sm" />
+          <span>Master Profile</span>
+        </a>
+
+        <hr class="glass-divider" />
+
+        <span class="nav-section">Coming soon</span>
+
+        <span class="nav-link nav-link--disabled">
+          <app-icon name="work" size="sm" />
+          <span>Experience</span>
+        </span>
+
+        <span class="nav-link nav-link--disabled">
+          <app-icon name="school" size="sm" />
+          <span>Education</span>
+        </span>
+
+        <span class="nav-link nav-link--disabled">
+          <app-icon name="code" size="sm" />
+          <span>Projects</span>
+        </span>
+
+        <span class="nav-link nav-link--disabled">
+          <app-icon name="badge" size="sm" />
+          <span>Certifications</span>
+        </span>
+      </nav>
+
+    </aside>
+
+    <main class="main-content">
+      <router-outlet />
+    </main>
+
+  </div>
+
+</div>

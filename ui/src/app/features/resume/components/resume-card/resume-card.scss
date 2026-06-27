@@ -1,0 +1,72 @@
+.resume-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 22px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+.resume-card__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+
+  h3 {
+    margin: 0;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    margin: 4px 0 0;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+}
+
+.menu-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.resume-card__body {
+  flex: 1;
+}
+
+.summary {
+  margin: 0 0 16px;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  &.empty {
+    color: var(--text-muted);
+    font-style: italic;
+  }
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.resume-card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(148, 163, 184, 0.18);
+}

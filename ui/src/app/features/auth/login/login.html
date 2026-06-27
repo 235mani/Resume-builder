@@ -1,0 +1,66 @@
+<div class="auth-page">
+
+  <div class="glass-panel glass-panel--strong auth-card">
+
+    <header class="auth-header">
+      <div class="auth-brand">
+        <app-icon name="description" size="lg" />
+        <h1>Resume Builder</h1>
+      </div>
+      <p class="auth-subtitle">Sign in to continue</p>
+    </header>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+      <div class="glass-field">
+        <label class="glass-label" for="email">Email</label>
+        <input id="email" class="glass-input" type="email" autocomplete="email" formControlName="email">
+        @if (loginForm.controls.email.touched) {
+          @if (loginForm.controls.email.hasError('required')) {
+            <span class="glass-error">Email is required</span>
+          } @else if (loginForm.controls.email.hasError('email')) {
+            <span class="glass-error">Enter a valid email</span>
+          }
+        }
+      </div>
+
+      <div class="glass-field">
+        <label class="glass-label" for="password">Password</label>
+        <div class="glass-input-wrap">
+          <input
+            id="password"
+            class="glass-input"
+            autocomplete="current-password"
+            formControlName="password"
+            [type]="hidePassword() ? 'password' : 'text'">
+          <button
+            type="button"
+            class="glass-btn glass-btn--icon glass-btn--ghost"
+            [attr.aria-label]="hidePassword() ? 'Show password' : 'Hide password'"
+            (click)="togglePassword()">
+            <app-icon [name]="hidePassword() ? 'visibility' : 'visibility-off'" size="sm" />
+          </button>
+        </div>
+        @if (loginForm.controls.password.touched && loginForm.controls.password.hasError('required')) {
+          <span class="glass-error">Password is required</span>
+        }
+      </div>
+
+      <button class="glass-btn glass-btn--primary glass-btn--block glass-btn--lg" type="submit" [disabled]="loading()">
+        @if (loading()) {
+          <span class="btn-spinner"></span>
+        } @else {
+          Sign in
+        }
+      </button>
+
+    </form>
+
+    <footer class="auth-footer">
+      <span>Don't have an account?</span>
+      <a routerLink="/register">Create one</a>
+    </footer>
+
+  </div>
+
+</div>

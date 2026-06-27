@@ -1,0 +1,101 @@
+@if (loading()) {
+  <app-loading-spinner message="Loading workspace..." />
+} @else if (error() || !resume()) {
+
+  <div class="empty-state error-state">
+    <app-icon name="error" size="xl" />
+    <h3>Resume not found</h3>
+    <p>This resume version may have been deleted or you don't have access.</p>
+    <a routerLink="/resumes" class="glass-btn glass-btn--primary">
+      <app-icon name="arrow-back" size="sm" />
+      Back to resumes
+    </a>
+  </div>
+
+} @else if (resume(); as r) {
+
+  <div class="page-header">
+
+    <div class="header-with-back">
+      <a routerLink="/resumes" class="glass-btn glass-btn--icon glass-btn--ghost" aria-label="Back to resumes">
+        <app-icon name="arrow-back" />
+      </a>
+      <div>
+        <h2>{{ r.name }}</h2>
+        <p class="subtitle">{{ r.displayTitle }}</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button type="button" class="glass-btn glass-btn--secondary" [disabled]="saving()" (click)="togglePublish()">
+        <app-icon [name]="r.isPublic ? 'visibility-off' : 'public'" size="sm" />
+        {{ r.isPublic ? 'Unpublish' : 'Publish' }}
+      </button>
+      <button type="button" class="glass-btn glass-btn--primary" [disabled]="saving()" (click)="openEditDialog()">
+        <app-icon name="edit" size="sm" />
+        Edit details
+      </button>
+    </div>
+
+  </div>
+
+  <div class="glass-tabs">
+    <button type="button" class="glass-tab" [class.active]="activeTab() === 'overview'" (click)="setTab('overview')">
+      Overview
+    </button>
+    <button type="button" class="glass-tab" [class.active]="activeTab() === 'skills'" (click)="setTab('skills')">
+      Skills
+    </button>
+  </div>
+
+  @if (activeTab() === 'overview') {
+
+    <div class="glass-panel glass-panel--strong overview-card">
+
+      <header class="overview-header">
+        <h3>Resume details</h3>
+        <p>Version-specific content for this application</p>
+      </header>
+
+      <div class="detail-grid">
+        <div class="detail-item">
+          <span class="label">Display title</span>
+          <span class="value">{{ r.displayTitle }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Template</span>
+          <span class="glass-badge">{{ r.template }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Status</span>
+          <span class="glass-badge" [class.glass-badge--success]="r.isPublic">
+            <app-icon [name]="r.isPublic ? 'public' : 'lock'" size="sm" />
+            {{ r.isPublic ? 'Public' : 'Private' }}
+          </span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Slug</span>
+          <span class="value muted">{{ r.slug }}</span>
+        </div>
+      </div>
+
+      <div class="summary-block">
+        <span class="label">Professional summary</span>
+        @if (r.professionalSummary) {
+          <p>{{ r.professionalSummary }}</p>
+        } @else {
+          <p class="empty">No summary added yet.</p>
+        }
+      </div>
+
+    </div>
+
+  } @else {
+
+    <div class="tab-panel">
+      <app-skill-list [resumeVersionId]="resumeId()" />
+    </div>
+
+  }
+
+}

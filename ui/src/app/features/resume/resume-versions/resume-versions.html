@@ -1,0 +1,70 @@
+<div class="page-header">
+
+  <div>
+    <h2>Resume Versions</h2>
+    <p class="subtitle">Create and manage tailored resumes for different roles.</p>
+  </div>
+
+  <button type="button" class="glass-btn glass-btn--primary" [disabled]="loading() || actionLoading()" (click)="openCreateDialog()">
+    <app-icon name="add" size="sm" />
+    New resume
+  </button>
+
+</div>
+
+@if (loading()) {
+  <app-loading-spinner message="Loading resume versions..." />
+} @else if (profileMissing()) {
+
+  <div class="empty-state">
+    <app-icon name="person" size="xl" />
+    <h3>Complete your profile first</h3>
+    <p>Create your master profile before adding resume versions.</p>
+    <a routerLink="/profile" class="glass-btn glass-btn--primary">
+      <app-icon name="person" size="sm" />
+      Set up profile
+    </a>
+  </div>
+
+} @else if (error()) {
+
+  <div class="empty-state error-state">
+    <app-icon name="error" size="xl" />
+    <h3>Could not load resumes</h3>
+    <p>Something went wrong while fetching your resume versions.</p>
+    <button type="button" class="glass-btn glass-btn--primary" (click)="loadResumes()">
+      <app-icon name="refresh" size="sm" />
+      Try again
+    </button>
+  </div>
+
+} @else if (resumes().length === 0) {
+
+  <div class="empty-state">
+    <app-icon name="description" size="xl" />
+    <h3>No resumes yet</h3>
+    <p>Build your master profile first, then create versions tailored to each job application.</p>
+    <a routerLink="/profile" class="glass-btn glass-btn--secondary">
+      <app-icon name="person" size="sm" />
+      Set up profile
+    </a>
+    <button type="button" class="glass-btn glass-btn--primary" (click)="openCreateDialog()">
+      <app-icon name="add" size="sm" />
+      Create first resume
+    </button>
+  </div>
+
+} @else {
+
+  <div class="resume-grid">
+    @for (resume of resumes(); track resume.id) {
+      <app-resume-card
+        [resume]="resume"
+        (edit)="openEditDialog($event)"
+        (delete)="confirmDelete($event)"
+        (publish)="togglePublish($event)"
+        (unpublish)="togglePublish($event)" />
+    }
+  </div>
+
+}

@@ -1,0 +1,36 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(6px);
+  animation: fade-in 0.2s ease;
+}
+
+.glass-modal {
+  width: 100%;
+  max-width: 520px;
+  max-height: min(90vh, 720px);
+  overflow: auto;
+  animation: slide-up 0.25s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

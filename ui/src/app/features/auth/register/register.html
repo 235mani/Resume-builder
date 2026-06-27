@@ -1,0 +1,88 @@
+<div class="auth-page">
+
+  <div class="glass-panel glass-panel--strong auth-card auth-card--wide">
+
+    <header class="auth-header">
+      <div class="auth-brand">
+        <app-icon name="person-add" size="lg" />
+        <h1>Create account</h1>
+      </div>
+      <p class="auth-subtitle">Start building tailored resumes</p>
+    </header>
+
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+
+      <div class="name-row">
+        <div class="glass-field">
+          <label class="glass-label" for="firstName">First name</label>
+          <input id="firstName" class="glass-input" autocomplete="given-name" formControlName="firstName">
+          @if (registerForm.controls.firstName.touched && registerForm.controls.firstName.hasError('required')) {
+            <span class="glass-error">Required</span>
+          }
+        </div>
+
+        <div class="glass-field">
+          <label class="glass-label" for="lastName">Last name</label>
+          <input id="lastName" class="glass-input" autocomplete="family-name" formControlName="lastName">
+          @if (registerForm.controls.lastName.touched && registerForm.controls.lastName.hasError('required')) {
+            <span class="glass-error">Required</span>
+          }
+        </div>
+      </div>
+
+      <div class="glass-field">
+        <label class="glass-label" for="email">Email</label>
+        <input id="email" class="glass-input" type="email" autocomplete="email" formControlName="email">
+        @if (registerForm.controls.email.touched) {
+          @if (registerForm.controls.email.hasError('required')) {
+            <span class="glass-error">Email is required</span>
+          } @else if (registerForm.controls.email.hasError('email')) {
+            <span class="glass-error">Enter a valid email</span>
+          }
+        }
+      </div>
+
+      <div class="glass-field">
+        <label class="glass-label" for="password">Password</label>
+        <div class="glass-input-wrap">
+          <input
+            id="password"
+            class="glass-input"
+            autocomplete="new-password"
+            formControlName="password"
+            [type]="hidePassword() ? 'password' : 'text'">
+          <button
+            type="button"
+            class="glass-btn glass-btn--icon glass-btn--ghost"
+            [attr.aria-label]="hidePassword() ? 'Show password' : 'Hide password'"
+            (click)="togglePassword()">
+            <app-icon [name]="hidePassword() ? 'visibility' : 'visibility-off'" size="sm" />
+          </button>
+        </div>
+        @if (registerForm.controls.password.touched) {
+          @if (registerForm.controls.password.hasError('required')) {
+            <span class="glass-error">Password is required</span>
+          } @else if (registerForm.controls.password.hasError('minlength')) {
+            <span class="glass-error">Use at least 6 characters</span>
+          }
+        }
+      </div>
+
+      <button class="glass-btn glass-btn--primary glass-btn--block glass-btn--lg" type="submit" [disabled]="loading()">
+        @if (loading()) {
+          <span class="btn-spinner"></span>
+        } @else {
+          Create account
+        }
+      </button>
+
+    </form>
+
+    <footer class="auth-footer">
+      <span>Already have an account?</span>
+      <a routerLink="/login">Sign in</a>
+    </footer>
+
+  </div>
+
+</div>

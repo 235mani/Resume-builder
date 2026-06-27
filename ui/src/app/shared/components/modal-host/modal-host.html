@@ -1,0 +1,7 @@
+@if (view(); as v) {
+  <div class="modal-backdrop" (click)="onBackdrop()" role="presentation">
+    <div class="glass-modal" (click)="$event.stopPropagation()" role="dialog" aria-modal="true">
+      <ng-container *ngComponentOutlet="v.component; injector: v.injector" />
+    </div>
+  </div>
+}

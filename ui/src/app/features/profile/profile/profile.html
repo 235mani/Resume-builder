@@ -1,0 +1,171 @@
+<div class="page-header">
+
+  <div>
+    <h2>Master Profile</h2>
+    <p class="subtitle">
+      @if (isNew()) {
+        Set up your profile to start creating resume versions.
+      } @else {
+        Your single source of truth for contact info reused across resumes.
+      }
+    </p>
+  </div>
+
+  @if (!isNew() && !editing() && !loading()) {
+    <button type="button" class="glass-btn glass-btn--primary" (click)="startEdit()">
+      <app-icon name="edit" size="sm" />
+      Edit profile
+    </button>
+  }
+
+</div>
+
+@if (loading()) {
+  <app-loading-spinner message="Loading profile..." />
+} @else if (editing()) {
+
+  <div class="glass-panel glass-panel--strong profile-card">
+
+    <header class="card-header">
+      <div class="avatar-ring">
+        <app-icon name="person" size="lg" />
+      </div>
+      <div>
+        <h3>{{ isNew() ? 'Create your profile' : 'Edit profile' }}</h3>
+        <p>Contact details and online presence</p>
+      </div>
+    </header>
+
+    <form [formGroup]="form" (ngSubmit)="save()">
+
+      <div class="form-row">
+        <div class="glass-field">
+          <label class="glass-label">First name</label>
+          <input class="glass-input" formControlName="firstName">
+          @if (form.controls.firstName.touched && form.controls.firstName.hasError('required')) {
+            <span class="glass-error">Required</span>
+          }
+        </div>
+        <div class="glass-field">
+          <label class="glass-label">Last name</label>
+          <input class="glass-input" formControlName="lastName">
+          @if (form.controls.lastName.touched && form.controls.lastName.hasError('required')) {
+            <span class="glass-error">Required</span>
+          }
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="glass-field">
+          <label class="glass-label">Email</label>
+          <input class="glass-input" type="email" formControlName="email">
+          @if (form.controls.email.touched && form.controls.email.hasError('required')) {
+            <span class="glass-error">Required</span>
+          }
+        </div>
+        <div class="glass-field">
+          <label class="glass-label">Phone</label>
+          <input class="glass-input" formControlName="phone">
+        </div>
+      </div>
+
+      <div class="glass-field">
+        <label class="glass-label">Location</label>
+        <input class="glass-input" formControlName="location" placeholder="City, Country">
+      </div>
+
+      <hr class="glass-divider" />
+      <p class="section-label">Links</p>
+
+      <div class="form-row">
+        <div class="glass-field">
+          <label class="glass-label">LinkedIn</label>
+          <input class="glass-input" formControlName="linkedin" placeholder="https://linkedin.com/in/...">
+        </div>
+        <div class="glass-field">
+          <label class="glass-label">GitHub</label>
+          <input class="glass-input" formControlName="github" placeholder="https://github.com/...">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="glass-field">
+          <label class="glass-label">Portfolio</label>
+          <input class="glass-input" formControlName="portfolio">
+        </div>
+        <div class="glass-field">
+          <label class="glass-label">Photo URL</label>
+          <input class="glass-input" formControlName="photoUrl">
+        </div>
+      </div>
+
+      <div class="form-actions">
+        @if (!isNew()) {
+          <button type="button" class="glass-btn glass-btn--ghost" (click)="cancelEdit()">Cancel</button>
+        }
+        <button type="submit" class="glass-btn glass-btn--primary" [disabled]="saving()">
+          {{ isNew() ? 'Create profile' : 'Save changes' }}
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+} @else if (profile(); as p) {
+
+  <div class="glass-panel glass-panel--strong profile-card">
+
+    <header class="card-header">
+      <div class="avatar-ring">
+        <app-icon name="person" size="lg" />
+      </div>
+      <div>
+        <h3>{{ p.firstName }} {{ p.lastName }}</h3>
+        <p>{{ p.email }}</p>
+      </div>
+    </header>
+
+    <div class="profile-details">
+      @if (p.phone) {
+        <div class="detail-row">
+          <app-icon name="phone" size="sm" />
+          <span>{{ p.phone }}</span>
+        </div>
+      }
+      @if (p.location) {
+        <div class="detail-row">
+          <app-icon name="location" size="sm" />
+          <span>{{ p.location }}</span>
+        </div>
+      }
+      @if (p.linkedin) {
+        <div class="detail-row">
+          <app-icon name="link" size="sm" />
+          <a [href]="p.linkedin" target="_blank" rel="noopener">{{ p.linkedin }}</a>
+        </div>
+      }
+      @if (p.github) {
+        <div class="detail-row">
+          <app-icon name="code" size="sm" />
+          <a [href]="p.github" target="_blank" rel="noopener">{{ p.github }}</a>
+        </div>
+      }
+      @if (p.portfolio) {
+        <div class="detail-row">
+          <app-icon name="globe" size="sm" />
+          <a [href]="p.portfolio" target="_blank" rel="noopener">{{ p.portfolio }}</a>
+        </div>
+      }
+    </div>
+
+    <footer class="card-footer">
+      <a routerLink="/resumes" class="glass-btn glass-btn--secondary">
+        <app-icon name="description" size="sm" />
+        Go to resumes
+      </a>
+    </footer>
+
+  </div>
+
+}

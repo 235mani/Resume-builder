@@ -1,0 +1,72 @@
+<article class="glass-panel resume-card">
+
+  <header class="resume-card__header">
+    <div>
+      <h3>{{ resume.name }}</h3>
+      <p>{{ resume.displayTitle }}</p>
+    </div>
+
+    <div class="menu-wrap">
+      <button type="button" class="glass-btn glass-btn--icon glass-btn--ghost" aria-label="Resume actions" (click)="toggleMenu($event)">
+        <app-icon name="more" size="sm" />
+      </button>
+
+      @if (menuOpen()) {
+        <div class="glass-dropdown" (click)="$event.stopPropagation()">
+          <button type="button" class="glass-dropdown__item" (click)="onEdit()">
+            <app-icon name="edit" size="sm" /> Edit
+          </button>
+          @if (resume.isPublic) {
+            <button type="button" class="glass-dropdown__item" (click)="onUnpublish()">
+              <app-icon name="visibility-off" size="sm" /> Unpublish
+            </button>
+          } @else {
+            <button type="button" class="glass-dropdown__item" (click)="onPublish()">
+              <app-icon name="public" size="sm" /> Publish
+            </button>
+          }
+          <button type="button" class="glass-dropdown__item glass-dropdown__item--danger" (click)="onDelete()">
+            <app-icon name="delete" size="sm" /> Delete
+          </button>
+        </div>
+      }
+    </div>
+  </header>
+
+  <div class="resume-card__body">
+    @if (resume.professionalSummary) {
+      <p class="summary">{{ resume.professionalSummary }}</p>
+    } @else {
+      <p class="summary empty">No summary added yet.</p>
+    }
+
+    <div class="badges">
+      <span class="glass-badge">{{ resume.template }}</span>
+      <span class="glass-badge" [class.glass-badge--success]="resume.isPublic">
+        <app-icon [name]="resume.isPublic ? 'public' : 'lock'" size="sm" />
+        {{ resume.isPublic ? 'Public' : 'Private' }}
+      </span>
+    </div>
+  </div>
+
+  <footer class="resume-card__footer">
+    <button type="button" class="glass-btn glass-btn--ghost" (click)="onEdit()">
+      <app-icon name="edit" size="sm" /> Edit
+    </button>
+
+    @if (resume.isPublic) {
+      <button type="button" class="glass-btn glass-btn--secondary" title="Make private" (click)="onUnpublish()">
+        <app-icon name="visibility-off" size="sm" /> Unpublish
+      </button>
+    } @else {
+      <button type="button" class="glass-btn glass-btn--secondary" title="Share publicly" (click)="onPublish()">
+        <app-icon name="public" size="sm" /> Publish
+      </button>
+    }
+
+    <a class="glass-btn glass-btn--primary" [routerLink]="['/workspace', resume.id]">
+      <app-icon name="open" size="sm" /> Open
+    </a>
+  </footer>
+
+</article>

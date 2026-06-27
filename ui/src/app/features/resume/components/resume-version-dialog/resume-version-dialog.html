@@ -1,0 +1,51 @@
+<div class="glass-panel glass-panel--modal">
+
+  <header class="modal-header">
+    <h2>{{ isEdit ? 'Edit resume version' : 'Create resume version' }}</h2>
+  </header>
+
+  <div class="modal-body">
+    <form [formGroup]="form">
+
+      <div class="glass-field">
+        <label class="glass-label">Internal name</label>
+        <input class="glass-input" formControlName="name" placeholder="e.g. Google SWE 2026">
+        <span class="glass-hint">Used to identify this version — not shown on the resume</span>
+        @if (form.controls.name.touched && form.controls.name.hasError('required')) {
+          <span class="glass-error">Name is required</span>
+        }
+      </div>
+
+      <div class="glass-field">
+        <label class="glass-label">Display title</label>
+        <input class="glass-input" formControlName="displayTitle" placeholder="e.g. Senior Software Engineer">
+        @if (form.controls.displayTitle.touched && form.controls.displayTitle.hasError('required')) {
+          <span class="glass-error">Display title is required</span>
+        }
+      </div>
+
+      <div class="glass-field">
+        <label class="glass-label">Professional summary</label>
+        <textarea class="glass-textarea" formControlName="professionalSummary" rows="4" placeholder="Brief overview tailored to this role..."></textarea>
+      </div>
+
+      <div class="glass-field">
+        <label class="glass-label">Template</label>
+        <select class="glass-select" formControlName="template">
+          @for (option of templates; track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+      </div>
+
+    </form>
+  </div>
+
+  <footer class="modal-actions">
+    <button type="button" class="glass-btn glass-btn--ghost" (click)="cancel()">Cancel</button>
+    <button type="button" class="glass-btn glass-btn--primary" (click)="save()">
+      {{ isEdit ? 'Save changes' : 'Create resume' }}
+    </button>
+  </footer>
+
+</div>

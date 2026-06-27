@@ -1,0 +1,34 @@
+<div class="glass-panel glass-panel--modal">
+
+  <header class="modal-header">
+    <h2>{{ isEdit ? 'Edit skill' : 'Add skill' }}</h2>
+  </header>
+
+  <div class="modal-body">
+    <form [formGroup]="form">
+
+      <div class="glass-field">
+        <label class="glass-label">Skill name</label>
+        <input class="glass-input" formControlName="name" placeholder="e.g. TypeScript">
+        @if (form.controls.name.touched && form.controls.name.hasError('required')) {
+          <span class="glass-error">Name is required</span>
+        }
+      </div>
+
+      <div class="glass-field">
+        <label class="glass-label">Display order</label>
+        <input class="glass-input" type="number" formControlName="displayOrder" min="0">
+        <span class="glass-hint">Lower numbers appear first</span>
+      </div>
+
+    </form>
+  </div>
+
+  <footer class="modal-actions">
+    <button type="button" class="glass-btn glass-btn--ghost" (click)="cancel()">Cancel</button>
+    <button type="button" class="glass-btn glass-btn--primary" (click)="save()">
+      {{ isEdit ? 'Save' : 'Add' }}
+    </button>
+  </footer>
+
+</div>

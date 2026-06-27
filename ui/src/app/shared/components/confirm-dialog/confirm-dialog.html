@@ -1,0 +1,25 @@
+<div class="glass-panel glass-panel--modal">
+
+  <header class="modal-header">
+    <h2>{{ data.title }}</h2>
+  </header>
+
+  <div class="modal-body">
+    <p>{{ data.message }}</p>
+  </div>
+
+  <footer class="modal-actions">
+    <button type="button" class="glass-btn glass-btn--ghost" (click)="cancel()">
+      {{ data.cancelLabel ?? 'Cancel' }}
+    </button>
+    <button
+      type="button"
+      class="glass-btn"
+      [class.glass-btn--primary]="data.confirmColor !== 'danger'"
+      [class.glass-btn--danger]="data.confirmColor === 'danger'"
+      (click)="confirm()">
+      {{ data.confirmLabel ?? 'Confirm' }}
+    </button>
+  </footer>
+
+</div>
