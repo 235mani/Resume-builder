@@ -16,8 +16,10 @@ public class CorsConfig {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of(
-                "http://localhost:4200"
+        configuration.setAllowedOriginPatterns(List.of(
+                "http://localhost:4200",
+                "http://*.up.railway.app",
+                "https://*.vercel.app"
         ));
 
         configuration.setAllowedMethods(List.of(
