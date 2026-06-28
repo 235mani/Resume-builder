@@ -39,10 +39,10 @@ export class RegisterComponent {
   protected readonly hidePassword = signal(true);
 
   protected readonly registerForm = this.fb.nonNullable.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
+    fullName: ['', Validators.required],
+    username: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]]
+    password: ['', [Validators.required]]
   });
 
   protected togglePassword(): void {
@@ -68,8 +68,8 @@ export class RegisterComponent {
           this.router.navigate(['/profile'], {
             state: {
               prefill: {
-                firstName: this.registerForm.controls.firstName.value,
-                lastName: this.registerForm.controls.lastName.value,
+                fullName: this.registerForm.controls.fullName.value,
+                username: this.registerForm.controls.username.value,
                 email: this.registerForm.controls.email.value
               }
             }

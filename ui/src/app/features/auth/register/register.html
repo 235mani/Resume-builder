@@ -14,17 +14,17 @@
 
       <div class="name-row">
         <div class="glass-field">
-          <label class="glass-label" for="firstName">First name</label>
-          <input id="firstName" class="glass-input" autocomplete="given-name" formControlName="firstName">
-          @if (registerForm.controls.firstName.touched && registerForm.controls.firstName.hasError('required')) {
+          <label class="glass-label" for="fullName">Full name</label>
+          <input id="fullName" class="glass-input" autocomplete="given-name" formControlName="fullName">
+          @if (registerForm.controls.fullName.touched && registerForm.controls.fullName.hasError('required')) {
             <span class="glass-error">Required</span>
           }
         </div>
 
         <div class="glass-field">
-          <label class="glass-label" for="lastName">Last name</label>
-          <input id="lastName" class="glass-input" autocomplete="family-name" formControlName="lastName">
-          @if (registerForm.controls.lastName.touched && registerForm.controls.lastName.hasError('required')) {
+          <label class="glass-label" for="username">User Name</label>
+          <input id="username" class="glass-input" autocomplete="family-name" formControlName="username">
+          @if (registerForm.controls.username.touched && registerForm.controls.username.hasError('required')) {
             <span class="glass-error">Required</span>
           }
         </div>
