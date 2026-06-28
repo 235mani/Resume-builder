@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://resumebuilder-dock.up.railway.app/api'
+  apiUrl: 'https://resume-builder-dahe.onrender.com/api'
 };
