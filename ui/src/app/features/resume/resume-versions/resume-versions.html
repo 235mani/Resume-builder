@@ -5,7 +5,7 @@
     <p class="subtitle">Create and manage tailored resumes for different roles.</p>
   </div>
 
-  <button type="button" class="glass-btn glass-btn--primary" [disabled]="loading() || actionLoading()" (click)="openCreateDialog()">
+  <button type="button" class="glass-btn glass-btn--primary" [disabled]="loading() || actionLoading() || profileMissing()" (click)="openCreateDialog()">
     <app-icon name="add" size="sm" />
     New resume
   </button>

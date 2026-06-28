@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 
 import { IconComponent } from '../../../../shared/ui/icon/icon';
 import { ResumeVersion } from '../../models/resume-version.models';
+import { RESUME_TEMPLATES } from '../../models/resume-version.models';
 
 @Component({
   selector: 'app-resume-card',
@@ -69,4 +70,8 @@ export class ResumeCardComponent {
     this.menuOpen.set(false);
     this.unpublish.emit(this.resume);
   }
+
+  protected readonly templates = Object.fromEntries(
+    RESUME_TEMPLATES.map(t => [t.value, t.label])
+  );
 }

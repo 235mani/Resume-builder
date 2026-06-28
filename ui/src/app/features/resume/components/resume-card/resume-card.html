@@ -41,7 +41,7 @@
     }
 
     <div class="badges">
-      <span class="glass-badge">{{ resume.template }}</span>
+      <span class="glass-badge">{{ templates[resume.template] }}</span>
       <span class="glass-badge" [class.glass-badge--success]="resume.isPublic">
         <app-icon [name]="resume.isPublic ? 'public' : 'lock'" size="sm" />
         {{ resume.isPublic ? 'Public' : 'Private' }}

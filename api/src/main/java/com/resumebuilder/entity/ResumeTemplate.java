@@ -6,5 +6,5 @@ public enum ResumeTemplate {
     MODERN,
     MINIMAL,
     DEVELOPER,
-    ATS
+    ATS_Friendly
 }

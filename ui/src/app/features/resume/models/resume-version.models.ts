@@ -3,7 +3,7 @@ export type ResumeTemplate =
   | 'MODERN'
   | 'MINIMAL'
   | 'DEVELOPER'
-  | 'ATS';
+  | 'ATS_Friendly';
 
 export interface ResumeVersion {
   id: number;
@@ -27,5 +27,5 @@ export const RESUME_TEMPLATES: { value: ResumeTemplate; label: string }[] = [
   { value: 'MODERN', label: 'Modern' },
   { value: 'MINIMAL', label: 'Minimal' },
   { value: 'DEVELOPER', label: 'Developer' },
-  { value: 'ATS', label: 'ATS Friendly' }
+  { value: 'ATS_Friendly', label: 'ATS Friendly' }
 ];
