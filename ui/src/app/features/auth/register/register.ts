@@ -13,6 +13,7 @@ import { AuthService } from '../auth';
 import { TokenService } from '../../../core/services/token';
 import { ToastService } from '../../../shared/services/toast.service';
 import { IconComponent } from '../../../shared/ui/icon/icon';
+import { CONSTANTS } from '../../../core/constants/api.constants';
 
 @Component({
   selector: 'app-register',
@@ -37,6 +38,8 @@ export class RegisterComponent {
 
   protected readonly loading = signal(false);
   protected readonly hidePassword = signal(true);
+
+  protected readonly CONSTANTS = CONSTANTS;
 
   protected readonly registerForm = this.fb.nonNullable.group({
     fullName: ['', Validators.required],

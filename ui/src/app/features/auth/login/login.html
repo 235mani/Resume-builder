@@ -16,41 +16,34 @@
         <label class="glass-label" for="email">Email</label>
         <input id="email" class="glass-input" type="email" autocomplete="email" formControlName="email">
         @if (loginForm.controls.email.touched) {
-          @if (loginForm.controls.email.hasError('required')) {
-            <span class="glass-error">Email is required</span>
-          } @else if (loginForm.controls.email.hasError('email')) {
-            <span class="glass-error">Enter a valid email</span>
-          }
+        @if (loginForm.controls.email.hasError('required')) {
+        <span class="glass-error">Email is required</span>
+        } @else if (loginForm.controls.email.hasError('email')) {
+        <span class="glass-error">Enter a valid email</span>
+        }
         }
       </div>
 
       <div class="glass-field">
         <label class="glass-label" for="password">Password</label>
         <div class="glass-input-wrap">
-          <input
-            id="password"
-            class="glass-input"
-            autocomplete="current-password"
-            formControlName="password"
+          <input id="password" class="glass-input" autocomplete="current-password" formControlName="password"
             [type]="hidePassword() ? 'password' : 'text'">
-          <button
-            type="button"
-            class="glass-btn glass-btn--icon glass-btn--ghost"
-            [attr.aria-label]="hidePassword() ? 'Show password' : 'Hide password'"
-            (click)="togglePassword()">
+          <button type="button" class="glass-btn glass-btn--icon glass-btn--ghost"
+            [attr.aria-label]="hidePassword() ? 'Show password' : 'Hide password'" (click)="togglePassword()">
             <app-icon [name]="hidePassword() ? 'visibility' : 'visibility-off'" size="sm" />
           </button>
         </div>
         @if (loginForm.controls.password.touched && loginForm.controls.password.hasError('required')) {
-          <span class="glass-error">Password is required</span>
+        <span class="glass-error">Password is required</span>
         }
       </div>
 
       <button class="glass-btn glass-btn--primary glass-btn--block glass-btn--lg" type="submit" [disabled]="loading()">
         @if (loading()) {
-          <span class="btn-spinner"></span>
+        <span class="btn-spinner"></span>
         } @else {
-          Sign in
+        Sign in
         }
       </button>
 
@@ -60,6 +53,7 @@
       <span>Don't have an account?</span>
       <a routerLink="/register">Create one</a>
     </footer>
+    <div class="beta-badge" style="display: flex; justify-content: center; align-items: center;">{{CONSTANTS.beta}}</div>
 
   </div>
 

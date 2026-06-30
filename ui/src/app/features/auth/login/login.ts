@@ -14,6 +14,7 @@ import { TokenService } from '../../../core/services/token';
 import { NavigationService } from '../../../core/services/navigation.service';
 import { ToastService } from '../../../shared/services/toast.service';
 import { IconComponent } from '../../../shared/ui/icon/icon';
+import { CONSTANTS } from '../../../core/constants/api.constants';
 
 @Component({
   selector: 'app-login',
@@ -38,7 +39,8 @@ export class LoginComponent {
 
   protected readonly hidePassword = signal(true);
   protected readonly loading = signal(false);
-
+  protected readonly CONSTANTS = CONSTANTS;
+  
   protected readonly loginForm = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]]
